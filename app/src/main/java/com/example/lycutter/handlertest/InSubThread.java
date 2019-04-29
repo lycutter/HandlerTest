@@ -60,7 +60,7 @@ public class InSubThread extends Activity implements View.OnClickListener {
                         Message message = mHandler.obtainMessage();
                         message.what = 1;
                         message.obj = new CostumObj("线程1");
-                        mHandler.sendMessageDelayed(message, 5000);
+                        mHandler.sendMessageDelayed(message, 1000);
                         Looper.loop();
                     }
                 }).start();
@@ -76,7 +76,7 @@ public class InSubThread extends Activity implements View.OnClickListener {
                         Message message = mHandler.obtainMessage();
                         message.what = 2;
                         message.obj = new CostumObj("线程2");
-                        mHandler.sendMessageDelayed(message, 8000);
+                        mHandler.sendMessageDelayed(message, 3000);
                         Looper.loop();
                     }
                 }).start();
@@ -138,20 +138,34 @@ public class InSubThread extends Activity implements View.OnClickListener {
             switch (what) {
                 case 1: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv1.setText("通过Handler更新UI-1");
                     break;
                 }
                 case 2: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv2.setText("通过Handler更新UI-2");
                     break;
@@ -159,10 +173,17 @@ public class InSubThread extends Activity implements View.OnClickListener {
 
                 case 3: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv3.setText("通过Handler更新UI-3");
                     break;
@@ -170,10 +191,17 @@ public class InSubThread extends Activity implements View.OnClickListener {
 
                 case 4: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv4.setText("通过Handler更新UI-4");
                     break;

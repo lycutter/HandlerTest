@@ -28,6 +28,8 @@ public class InUIThread extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mHandler = new CostumHandler();
+
         btn_thread1 = findViewById(R.id.btn_thread1);
         btn_thread2 = findViewById(R.id.btn_thread2);
         btn_thread3 = findViewById(R.id.btn_thread3);
@@ -46,43 +48,105 @@ public class InUIThread extends Activity implements View.OnClickListener {
 
     }
 
+//    @Override
+//    public void onClick(View v) {
+//        int btn_id = v.getId();
+//        switch (btn_id) {
+//            case R.id.btn_thread1: {
+//                mHandler = new CostumHandler();
+//                Message msg = mHandler.obtainMessage();
+//                msg.what = 1;
+//                msg.obj = new CostumObj("线程1");
+//                mHandler.sendMessage(msg);
+//
+//                break;
+//            }
+//            case R.id.btn_thread2: {
+//                mHandler = new CostumHandler();
+//                Message msg = mHandler.obtainMessage();
+//                msg.what = 2;
+//                msg.obj = new CostumObj("线程2");
+//                mHandler.sendMessage(msg);
+//                break;
+//            }
+//            case R.id.btn_thread3: {
+//                mHandler = new CostumHandler();
+//                Message msg = mHandler.obtainMessage();
+//                msg.what = 3;
+//                msg.obj = new CostumObj("线程3");
+//                mHandler.sendMessage(msg);
+//                break;
+//            }
+//            case R.id.btn_thread4: {
+//                mHandler = new CostumHandler();
+//                Message msg = mHandler.obtainMessage();
+//                msg.what = 4;
+//                msg.obj = new CostumObj("线程4");
+//                mHandler.sendMessage(msg);
+//                break;
+//            }
+//
+//            default:
+//                break;
+//        }
+//    }
+
     @Override
     public void onClick(View v) {
         int btn_id = v.getId();
         switch (btn_id) {
             case R.id.btn_thread1: {
-                mHandler = new CostumHandler();
-                Message msg = mHandler.obtainMessage();
-                msg.what = 1;
-                msg.obj = new CostumObj("线程1");
-                mHandler.sendMessage(msg);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CostumObj obj = new CostumObj("线程1");
+                        mHandler.obtainMessage(1, obj).sendToTarget();
+                        System.out.println("主线程id == " + Looper.getMainLooper().getThread().getId());
+                        System.out.println("本线程id == " + Thread.currentThread().getId());
+                    }
+                }).start();
+
                 break;
             }
             case R.id.btn_thread2: {
-                mHandler = new CostumHandler();
-                Message msg = mHandler.obtainMessage();
-                msg.what = 2;
-                msg.obj = new CostumObj("线程2");
-                mHandler.sendMessage(msg);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CostumObj obj = new CostumObj("线程2");
+                        mHandler.obtainMessage(2, obj).sendToTarget();
+                        System.out.println("主线程id == " + Looper.getMainLooper().getThread().getId());
+                        System.out.println("本线程id == " + Thread.currentThread().getId());
+                    }
+                }).start();
+
                 break;
             }
             case R.id.btn_thread3: {
-                mHandler = new CostumHandler();
-                Message msg = mHandler.obtainMessage();
-                msg.what = 3;
-                msg.obj = new CostumObj("线程3");
-                mHandler.sendMessage(msg);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CostumObj obj = new CostumObj("线程3");
+                        mHandler.obtainMessage(3, obj).sendToTarget();
+                        System.out.println("主线程id == " + Looper.getMainLooper().getThread().getId());
+                        System.out.println("本线程id == " + Thread.currentThread().getId());
+                    }
+                }).start();
+
                 break;
             }
             case R.id.btn_thread4: {
-                mHandler = new CostumHandler();
-                Message msg = mHandler.obtainMessage();
-                msg.what = 4;
-                msg.obj = new CostumObj("线程4");
-                mHandler.sendMessage(msg);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        CostumObj obj = new CostumObj("线程4");
+                        mHandler.obtainMessage(4, obj).sendToTarget();
+                        System.out.println("主线程id == " + Looper.getMainLooper().getThread().getId());
+                        System.out.println("本线程id == " + Thread.currentThread().getId());
+                    }
+                }).start();
+
                 break;
             }
-
             default:
                 break;
         }
@@ -101,20 +165,34 @@ public class InUIThread extends Activity implements View.OnClickListener {
             switch (what) {
                 case 1: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv1.setText("通过Handler更新UI-1");
                     break;
                 }
                 case 2: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv2.setText("通过Handler更新UI-2");
                     break;
@@ -122,10 +200,17 @@ public class InUIThread extends Activity implements View.OnClickListener {
 
                 case 3: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv3.setText("通过Handler更新UI-3");
                     break;
@@ -133,10 +218,17 @@ public class InUIThread extends Activity implements View.OnClickListener {
 
                 case 4: {
                     if (Looper.myLooper() == Looper.getMainLooper()) {
-                        System.out.println("正在UI线程...........");
+                        System.out.println("myLooper正在UI线程...........");
                     } else {
-                        System.out.println("不在UI线程..........");
+                        System.out.println("myLooper不在UI线程..........");
                     }
+
+                    if (Looper.getMainLooper().getThread().getId() == Thread.currentThread().getId()) {
+                        System.out.println("handler运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    } else {
+                        System.out.println("handler不是运行在主线程, 当前线程id === " + Thread.currentThread().getId() );
+                    }
+
                     System.out.println("obj ===== " + obj);
                     tv4.setText("通过Handler更新UI-4");
                     break;
