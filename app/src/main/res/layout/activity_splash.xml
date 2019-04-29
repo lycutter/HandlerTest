@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashActivity">
+    tools:context=".SplashActivity"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/toUIThread"
@@ -18,6 +19,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="前往Sub线程"
+        android:textSize="18sp"/>
+
+    <Button
+        android:id="@+id/toHandlerCallback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="前往Callback"
         android:textSize="18sp"/>
 
 </LinearLayout>

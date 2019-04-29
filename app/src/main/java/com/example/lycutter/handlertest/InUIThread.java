@@ -8,6 +8,7 @@ import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class InUIThread extends Activity implements View.OnClickListener {
     private Button btn_thread1;
@@ -44,6 +45,9 @@ public class InUIThread extends Activity implements View.OnClickListener {
         btn_thread2.setOnClickListener(this);
         btn_thread3.setOnClickListener(this);
         btn_thread4.setOnClickListener(this);
+
+
+
 
 
     }
@@ -178,6 +182,8 @@ public class InUIThread extends Activity implements View.OnClickListener {
 
                     System.out.println("obj ===== " + obj);
                     tv1.setText("通过Handler更新UI-1");
+                    Toast.makeText(InUIThread.this, "更新线程1", Toast.LENGTH_SHORT).show();
+
                     break;
                 }
                 case 2: {
@@ -195,6 +201,7 @@ public class InUIThread extends Activity implements View.OnClickListener {
 
                     System.out.println("obj ===== " + obj);
                     tv2.setText("通过Handler更新UI-2");
+                    Toast.makeText(InUIThread.this, "更新线程2", Toast.LENGTH_SHORT).show();
                     break;
                 }
 
@@ -213,6 +220,7 @@ public class InUIThread extends Activity implements View.OnClickListener {
 
                     System.out.println("obj ===== " + obj);
                     tv3.setText("通过Handler更新UI-3");
+                    Toast.makeText(InUIThread.this, "更新线程3", Toast.LENGTH_SHORT).show();
                     break;
                 }
 
@@ -231,6 +239,7 @@ public class InUIThread extends Activity implements View.OnClickListener {
 
                     System.out.println("obj ===== " + obj);
                     tv4.setText("通过Handler更新UI-4");
+                    Toast.makeText(InUIThread.this, "更新线程4", Toast.LENGTH_SHORT).show();
                     break;
                 }
 

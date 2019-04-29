@@ -10,6 +10,7 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
     private Button btn_toUI;
     private Button btn_toSub;
+    private Button btn_toCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,9 +19,10 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
 
         btn_toUI = findViewById(R.id.toUIThread);
         btn_toSub = findViewById(R.id.toSubThread);
-
+        btn_toCallback = findViewById(R.id.toHandlerCallback);
         btn_toUI.setOnClickListener(this);
         btn_toSub.setOnClickListener(this);
+        btn_toCallback.setOnClickListener(this);
     }
 
     @Override
@@ -39,7 +41,12 @@ public class SplashActivity extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             }
-
+            case R.id.toHandlerCallback: {
+                Intent intent = new Intent(SplashActivity.this, HandlerCallback.class);
+                startActivity(intent);
+                finish();
+                break;
+            }
             default:
                 break;
         }

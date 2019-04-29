@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InSubThread"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_thread1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="线程1"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btn_thread2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="线程2"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btn_thread3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="线程3"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btn_thread4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="线程4"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_tv"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="线程1等待中"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="线程2等待中"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="线程3等待中"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="线程4等待中"
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
